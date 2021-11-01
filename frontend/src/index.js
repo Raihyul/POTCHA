@@ -8,6 +8,7 @@ import { Provider } from "react-redux";
 import rootReducer from "./modules";
 import { composeWithDevTools } from "redux-devtools-extension";
 import axios from "axios";
+import ScrollToTop from "./components/ScrollToTop";
 
 const store = createStore(rootReducer, composeWithDevTools());
 
@@ -16,7 +17,7 @@ axios.defaults.baseURL = "http://localhost:5000";
 ReactDOM.render(
   <Router>
     <Provider store={store}>
-      <App />
+        <App />
     </Provider>
   </Router>,
   document.getElementById("root")

@@ -1,15 +1,27 @@
 const MOVIE = "potatoes/MOVIE";
 const TV = "potatoes/TV";
+const MOVIEANALYSIS = "potatoes/ANALYSIS/MOVIE";
+const TVANALYSIS = "potatoes/ANALYSIS/TV";
 
 export const moviePotatoes = (moviePotatoList) => ({
   type: MOVIE,
   moviePotatoList,
 });
 export const tvPotatoes = (tvPotatoList) => ({ type: TV, tvPotatoList });
+export const movieAnalysisPotatoes = (movieAnalysisList) => ({
+  type: MOVIEANALYSIS,
+  movieAnalysisList,
+});
+export const tvAnalysisPotatoes = (tvAnalysisList) => ({
+  type: TVANALYSIS,
+  tvAnalysisList,
+});
 
 const initialState = {
   moviePotatoList: "",
   tvPotatoList: "",
+  movieAnalysisList: [],
+  tvAnalysisList: [],
 };
 
 function catchPotato(state = initialState, action) {
@@ -24,6 +36,17 @@ function catchPotato(state = initialState, action) {
         ...state,
         tvPotatoList: action.tvPotatoList,
       };
+    case MOVIEANALYSIS:
+      return {
+        ...state,
+        movieAnalysisList: action.movieAnalysisList,
+      };
+    case TVANALYSIS:
+      return {
+        ...state,
+        tvAnalysisList: action.tvAnalysisList,
+      };
+
     default:
       return state;
   }

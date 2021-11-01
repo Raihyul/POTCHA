@@ -10,11 +10,14 @@ import { Scrollbars } from "react-custom-scrollbars";
 const PotatoBasket = ({
   moviePotatoList,
   tvPotatoList,
+  movieAnalysisList,
+  tvAnalysisList,
   onMoviePotatoes,
   onTvPotatoes,
+  onMovieAnalysisPotatoes,
+  onTvAnalysisPotatoes,
 }) => {
   const params = useParams();
-  const [movieWord, setMovieWord] = useState([]);
   const [tvWord, setTvWord] = useState([]);
   const potatoData = async () => {
     try {
@@ -49,7 +52,9 @@ const PotatoBasket = ({
             }))
         )
       );
-      setMovieWord(movieWord.concat(movieWordList));
+      if (movieWordList != movieAnalysisList) {
+        onMovieAnalysisPotatoes(movieWordList);
+      }
     } catch (error) {
       console.log(error.response);
     }
@@ -63,17 +68,21 @@ const PotatoBasket = ({
           headers: tokenHeader(),
         }
       );
-      let tvWordList = [];
-      Object.values(response.data).map((content) =>
-        content.slice(0, 5).map(
-          (content2) =>
-            (tvWordList = tvWordList.concat({
-              text: content2[0],
-              value: content2[1],
-            }))
-        )
-      );
-      setTvWord(tvWord.concat(tvWordList));
+      if (response.data != tvAnalysisList) {
+        onTvAnalysisPotatoes(response.data);
+        console.log(tvAnalysisList);
+        let tvWordList = [];
+        Object.values(tvAnalysisList).map((content) =>
+          content.slice(0, 5).map(
+            (content2) =>
+              (tvWordList = tvWordList.concat({
+                text: content2[0],
+                value: content2[1],
+              }))
+          )
+        );
+        setTvWord(tvWordList);
+      }
     } catch (error) {
       console.log(error.response);
     }
@@ -131,7 +140,7 @@ const PotatoBasket = ({
           <BasketTitle>찐 영화 감자 분석</BasketTitle>
           <WordCloudComponent
             style={{ display: "static" }}
-            words={movieWord}
+            words={movieAnalysisList}
           />
         </PotatoAnalysis>
       </Container>
@@ -178,10 +187,7 @@ const PotatoBasket = ({
         </Basket>
         <PotatoAnalysis>
           <BasketTitle>찐 TV 감자 분석</BasketTitle>
-          <WordCloudComponent
-            style={{ display: "static" }}
-            words={tvWord}
-          />
+          <WordCloudComponent style={{ display: "static" }} words={tvWord} />
         </PotatoAnalysis>
       </Container>
     </Baskets>

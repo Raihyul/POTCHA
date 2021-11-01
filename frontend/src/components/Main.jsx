@@ -80,121 +80,124 @@ const Main = ({ popularList, predictableList, onPopular, onPredictable }) => {
   const order = ["1.", "2.", "3.", "4.", "5."];
   return (
     <div className="main">
-      <TopTen className="topTen">
-        <TopTenTitle className="topTenTitle">인기 컨텐츠 Top 10</TopTenTitle>
-        {!popularList ? (
-          <img
-            src="https://blog.kakaocdn.net/dn/cmseNl/btrhhTwEA0r/TNAoELO6JmK3rhVeNfGYy0/img.gif"
-            alt=""
-            style={{
-              width: "20%",
-              marginTop: "130px",
-            }}
-          />
-        ) : (
-          <StyledSlider {...settings}>
-            {popularList.map((content) => (
-              <CardBox key={content.id}>
-                <CardImg
-                  alt="인기 컨텐츠"
-                  src={`${imgUrl}${content.poster_path}`}
-                />
-                <CardText>{content.title}</CardText>
-              </CardBox>
-            ))}
-          </StyledSlider>
-        )}
-      </TopTen>
-      <BackgroundSquare height={height} />
-      <PredictionContainer className="prediction" ref={predictRef}>
-        <Tab currTab={currTab} onClick={handleClickTab} />
-        <PredictionTitle className="predictionTiTle">{`${currTab} 흥행 예측 분석 top 5`}</PredictionTitle>
-        <PredictChart className="predictChart">
-          {currTab === "MOVIE" ? (
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: "1.4fr 1.5fr 1fr",
-              }}
-            >
-              {[movieGenres, movieKeyword, movieCountry].map((data, idx) => (
-                <PredictSeparate key={idx}>
-                  <PredictChartTitle className="predictChartTitle">
-                    {distribution[idx]}
-                  </PredictChartTitle>
-                  <MyResponsivePie data={data} key={idx} />
-                </PredictSeparate>
-              ))}
-            </div>
-          ) : (
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: "1.2fr 1.5fr 1fr",
-              }}
-              className="predictContainer"
-            >
-              {[tvGenres, tvKeyword, tvCountry].map((data, idx) => (
-                <PredictSeparate key={idx}>
-                  <PredictChartTitle className="predictChartTitle">
-                    {distribution[idx]}
-                  </PredictChartTitle>
-                  <MyResponsivePie data={data} key={idx} />
-                </PredictSeparate>
-              ))}
-            </div>
-          )}
-        </PredictChart>
-        <Recommendation className="recommendation">
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "1.8fr 4fr",
-              padding: "0px 30px",
-              marginBottom: "30px",
-              fontSize: "25px",
-            }}
-            className="subtitles"
-          >
-            <h1>흥행 예측 top 5</h1>
-            <h1>코로나 이전 유사 컨텐츠</h1>
-          </div>
-          {!predictableList ? (
+        <TopTen className="topTen">
+          <TopTenTitle className="topTenTitle">인기 컨텐츠 Top 10</TopTenTitle>
+          {!popularList ? (
             <img
               src="https://blog.kakaocdn.net/dn/cmseNl/btrhhTwEA0r/TNAoELO6JmK3rhVeNfGYy0/img.gif"
               alt=""
               style={{
                 width: "20%",
-                marginTop: "80px",
+                marginTop: "130px",
               }}
             />
           ) : (
-            predictableList.map((List, idx) => (
+            <StyledSlider {...settings}>
+              {popularList.map((content) => (
+                <CardBox key={content.id}>
+                  <CardImg
+                    alt="인기 컨텐츠"
+                    src={`${imgUrl}${content.poster_path}`}
+                  />
+                  <CardText>{content.title}</CardText>
+                </CardBox>
+              ))}
+            </StyledSlider>
+          )}
+        </TopTen>
+        <BackgroundSquare height={height} />
+        <PredictionContainer className="prediction" ref={predictRef}>
+          <Tab currTab={currTab} onClick={handleClickTab} />
+          <PredictionTitle className="predictionTiTle">{`${currTab} 흥행 예측 분석 top 5`}</PredictionTitle>
+          <PredictChart className="predictChart">
+            {currTab === "MOVIE" ? (
               <div
-                key={idx}
                 style={{
-                  display: "flex",
-                  alignItems: "center",
-                  // padding: "30px",
-                  borderBottom: "solid 2px #a6a3f1",
-                  marginBottom: "60px",
+                  display: "grid",
+                  gridTemplateColumns: "1.4fr 1.5fr 1fr",
                 }}
               >
-                <h1
+                {[movieGenres, movieKeyword, movieCountry].map((data, idx) => (
+                  <PredictSeparate key={idx}>
+                    <PredictChartTitle className="predictChartTitle">
+                      {distribution[idx]}
+                    </PredictChartTitle>
+                    <MyResponsivePie data={data} key={idx} />
+                  </PredictSeparate>
+                ))}
+              </div>
+            ) : (
+              <div
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "1.2fr 1.5fr 1fr",
+                }}
+                className="predictContainer"
+              >
+                {[tvGenres, tvKeyword, tvCountry].map((data, idx) => (
+                  <PredictSeparate key={idx}>
+                    <PredictChartTitle className="predictChartTitle">
+                      {distribution[idx]}
+                    </PredictChartTitle>
+                    <MyResponsivePie data={data} key={idx} />
+                  </PredictSeparate>
+                ))}
+              </div>
+            )}
+          </PredictChart>
+          <Recommendation className="recommendation">
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "1.8fr 4fr",
+                padding: "0px 30px",
+                marginBottom: "30px",
+                fontSize: "25px",
+              }}
+              className="subtitles"
+            >
+              <h1>흥행 예측 top 5</h1>
+              <h1>코로나 이전 유사 컨텐츠</h1>
+            </div>
+            {!predictableList ? (
+              <img
+                src="https://blog.kakaocdn.net/dn/cmseNl/btrhhTwEA0r/TNAoELO6JmK3rhVeNfGYy0/img.gif"
+                alt=""
+                style={{
+                  width: "20%",
+                  marginTop: "80px",
+                }}
+              />
+            ) : (
+              predictableList.map((List, idx) => (
+                <div
+                  key={idx}
                   style={{
-                    fontSize: "30px",
-                    color: "#8e8be9",
-                    transform: "translateY(150px) translateX(10px)",
+                    display: "flex",
+                    alignItems: "center",
+                    // padding: "30px",
+                    borderBottom: "solid 2px #a6a3f1",
+                    marginBottom: "60px",
                   }}
                 >
-                  {order[idx]}
-                </h1>
-                <PredictionOrder List={List} currTab={currTab.toLowerCase()} />
-              </div>
-            ))
-          )}
-        </Recommendation>
-      </PredictionContainer>
+                  <h1
+                    style={{
+                      fontSize: "30px",
+                      color: "#8e8be9",
+                      transform: "translateY(150px) translateX(10px)",
+                    }}
+                  >
+                    {order[idx]}
+                  </h1>
+                  <PredictionOrder
+                    List={List}
+                    currTab={currTab.toLowerCase()}
+                  />
+                </div>
+              ))
+            )}
+          </Recommendation>
+        </PredictionContainer>
     </div>
   );
 };
