@@ -36,6 +36,7 @@ const App = () => {
     }, 2000);
   };
 
+
   return (
     <div
       className="centerPosition"
@@ -67,15 +68,11 @@ const App = () => {
               <PublicRoute exact path="/" component={NonSignIn} />
               <PublicRoute path="/signin" component={Signin} />
               <PublicRoute path="/signin">
-                <Signin
-                  windowHeight={windowSize.height}
-                />
+                <Signin windowHeight={windowSize.height} />
               </PublicRoute>
               <PublicRoute path="/signup" component={Signup} />
               <PublicRoute path="/signup">
-                <Signup
-                  windowHeight={windowSize.height}
-                />
+                <Signup windowHeight={windowSize.height} />
               </PublicRoute>
               <PrivateRoute path="/main" component={MainContainer} />
               <PrivateRoute
@@ -159,7 +156,6 @@ const NonPage = styled.div`
   justify-content: center;
   align-items: center;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-
 `;
 
 const NonPageComment = styled.h2`
